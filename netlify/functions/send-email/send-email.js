@@ -44,7 +44,7 @@ const handler = async (event) => {
     });
     const mailOptions = {
       from: `"Yashua Pervez" <${process.env.EMAIL_USER_NAME}>`,
-      to: "yashuapervez@gmail.com",
+      to: "yashuapervez@gmail.com, guesswhoeve@gmail.com",
       subject: "Message from your website",
       html: output,
     };
