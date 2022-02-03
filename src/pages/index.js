@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "gatsby";
 
 // Components
 import SEO from "../components/SEO";
@@ -29,9 +30,9 @@ const HomePage = () => {
               console.log("here");
               return (
                 <li>
-                  <a href={`/${city}/${service}`}>
+                  <Link to={`/${city}/${service}`}>
                     {city} - {service}
-                  </a>
+                  </Link>
                 </li>
               );
             });
