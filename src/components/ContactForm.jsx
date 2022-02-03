@@ -23,6 +23,8 @@ const contactFormSchema = yup.object().shape({
 
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const {
     handleSubmit,
@@ -32,9 +34,32 @@ const ContactForm = () => {
     resolver: yupResolver(contactFormSchema),
   });
 
-  const sendEmailHandler = (data) => {
-    setSubmitted(true);
-    console.log("data >>", data);
+  const sendEmailHandler = async (data) => {
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "https://test-gatsby-website.netlify.app/.netlify/functions/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "*/*",
+          },
+          body: JSON.stringify({ ...data }),
+        }
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Failed to send email");
+      }
+
+      setSubmitted(true);
+    } catch (e) {
+      setError(e.message);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -80,9 +105,10 @@ const ContactForm = () => {
         )}
       </div>
       {submitted && (
-        <div className="message-success">Email sent successfully</div>
+        <div className="message message-success">Email sent successfully</div>
       )}
-      <button>Submit</button>
+      {error && <div className="message message-error">{error}</div>}
+      <button>{loading ? "Sending Email..." : "Submit"}</button>
     </form>
   );
 };
