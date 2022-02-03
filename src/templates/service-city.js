@@ -18,7 +18,7 @@ const HomePage = ({ pageContext }) => {
         title={`${service} in ${city}`}
         name={`${service} in ${city}`}
         description={`description for ${service} in ${city}`}
-        websiteURL="https://test-gatsby-website.netlify.app/"
+        websiteURL={`https://test-gatsby-website.netlify.app/${city}/${service}`}
         favIcon={favIcon}
         lang="en"
         twitterHandle="test-website"
