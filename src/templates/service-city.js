@@ -3,8 +3,10 @@ import { StaticImage } from "gatsby-plugin-image";
 
 // Components
 import ContactForm from "../components/ContactForm";
+import SEO from "../components/SEO";
 
 //
+import favIcon from "../images/icon.png";
 import "../syles/home.scss";
 
 const HomePage = ({ pageContext }) => {
@@ -12,6 +14,16 @@ const HomePage = ({ pageContext }) => {
 
   return (
     <div className="main">
+      <SEO
+        title={`${service} in ${city}`}
+        name={`${service} in ${city}`}
+        description={`description for ${service} in ${city}`}
+        websiteURL="https://test-gatsby-website.netlify.app/"
+        favIcon={favIcon}
+        lang="en"
+        twitterHandle="test-website"
+      />
+
       <h1 className="main-heading">
         Get {service} to {city}
       </h1>
@@ -21,6 +33,7 @@ const HomePage = ({ pageContext }) => {
             src="../images/main-image.jpg"
             loading="eager"
             placeholder="tracedSVG"
+            alt="Main Image"
           />
         </div>
         <div className="contact-form">
